@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:practice_test/main.dart';
 
@@ -7,10 +10,16 @@ void main() {
     await loadAppFonts();
 
     await tester.pumpWidgetBuilder(
-      MyApp(),
-      surfaceSize: const Size(400, 800),
+      const MyApp(),
+      surfaceSize: const Size(400, 800), // ✅ Fix size for consistency
       wrapper: materialAppWrapper(platform: TargetPlatform.android),
     );
-    await screenMatchesGolden(tester, 'counter_page_golden');
+
+    await screenMatchesGolden(
+      tester,
+      'counter_page_golden',
+      autoHeight: false,
+      customPump: (tester) async => await tester.pumpAndSettle(),
+    );
   });
 }
