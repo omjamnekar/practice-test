@@ -5,7 +5,7 @@ import 'package:practice_test/main.dart';
 void main() {
   testGoldens('CounterPage golden', (tester) async {
     await loadAppFonts();
-    print("reset");
+
     await tester.pumpWidgetBuilder(
       MyApp(),
       surfaceSize: const Size(400, 800),
