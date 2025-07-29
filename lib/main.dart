@@ -5,6 +5,8 @@ import 'counter_bloc.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +16,8 @@ class MyApp extends StatelessWidget {
 }
 
 class CounterPage extends StatelessWidget {
+  const CounterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<CounterBloc>();
