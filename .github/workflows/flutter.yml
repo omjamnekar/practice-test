@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_group: [unit, widget, integration]
 
     steps:
       - name: Checkout repository
@@ -25,9 +28,11 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      - name: Install xvfb (virtual display for golden tests)
-        run: sudo apt-get update && sudo apt-get install -y xvfb
-
-      - name: Run Tests (with xvfb)
+      - name: Run ${{ matrix.test_group }} tests with xvfb
         run: |
-          xvfb-run --auto-servernum -- flutter test
+          sudo apt-get update && sudo apt-get install -y xvfb
+          if [[ "${{ matrix.test_group }}" == "integration" ]]; then
+            xvfb-run --auto-servernum -- flutter test integration_test
+          else
+            xvfb-run --auto-servernum -- flutter test --tags ${{ matrix.test_group }}
+          fi

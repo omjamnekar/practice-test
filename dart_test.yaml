@@ -1,3 +1,7 @@
 tags:
-  golden:
+  unit:
+    enable: true
+  widget:
+    enable: true
+  integration:
     enable: true

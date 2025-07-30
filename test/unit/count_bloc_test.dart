@@ -1,3 +1,5 @@
+// test/unit/counter_bloc_test.dart
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:practice_test/counter_bloc.dart';
@@ -15,6 +17,7 @@ void main() {
       build: () => counterBloc,
       act: (bloc) => bloc.add(IncrementEvent()),
       expect: () => [CounterState(counterValue: 1)],
+      tags: ['unit'], // ✅ Add tag
     );
 
     blocTest<CounterBloc, CounterState>(
@@ -22,6 +25,7 @@ void main() {
       build: () => counterBloc,
       act: (bloc) => bloc.add(DecrementEvent()),
       expect: () => [CounterState(counterValue: -1)],
+      tags: ['unit'], // ✅ Add tag
     );
   });
 }
